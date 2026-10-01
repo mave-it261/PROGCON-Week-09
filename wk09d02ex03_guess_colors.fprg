@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="rainbowcolorsquiz_maverick_mesare"/>
+        <attribute name="authors" value="maverick"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-01 10:35:20 AM"/>
+        <attribute name="created" value="bWF2ZXJpY2s7TUFWRVJJQ0stLUFDRVItOzIwMjYtMDktMTQ7MDE6Mzk6NTkgQU07MzE0Mg=="/>
+        <attribute name="edited" value="bWF2ZXJpY2s7TUFWRVJJQ0stLUFDRVItOzIwMjYtMDktMTQ7MDE6NDI6MDMgQU07MTtNYXZla2VuY2FpdGxlZTtERVNLVE9QLVBPOUs4VlU7MjAyNi0wOS0wNDsxMTo0MzoxMSBBTTt3azhfYWN0NF9iaXJ0aGRheV9zdWJzdHJpbmcuZnByZzsxMDQwOQ=="/>
+        <attribute name="edited" value="bWF2ZXJpY2s7TUFWRVJJQ0stLUFDRVItOzIwMjYtMDktMTQ7MDE6NDU6MzMgQU07MTttYXZlcmljaztNQVZFUklDSy0tQUNFUi07MjAyNi0wOS0xMzsxMDoxNToxNiBQTTtyYWluYm93Q29sb3JzX21hdmVyaWNrX21lc2FyZV9heTIwMjYtMjAyNy5mcHJnOzEwNzk3"/>
+        <attribute name="edited" value="bWF2ZXJpY2s7TUFWRVJJQ0stLUFDRVItOzIwMjYtMDktMTQ7MDE6NTc6NTEgQU07MTttYXZlcmljaztNQVZFUklDSy0tQUNFUi07MjAyNi0wOS0xMzsxMDo1OTo0OSBQTTtyYWluYm93Q29sb3JzdGhhdHlvdWNhbmRlY2lkZWZvcnlvc2VsZi5mcHJnOzExMDUz"/>
+        <attribute name="edited" value="bWF2ZXJpY2s7TUFWRVJJQ0stLUFDRVItOzIwMjYtMTAtMDE7MTA6MzU6MjAgQU07ODszMjI5"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="rainbowColors" type="String" array="True" size="7"/>
+            <declare name="userName, grade" type="String" array="False" size=""/>
+            <declare name="correctCount" type="Integer" array="False" size=""/>
+            <assign variable="rainbowColors[0]" expression="&quot;red&quot;"/>
+            <assign variable="rainbowColors[0]" expression="&quot;red&quot;"/>
+            <assign variable="rainbowColors[1]" expression="&quot;orange&quot;"/>
+            <assign variable="rainbowColors[2]" expression="&quot;yellow&quot;"/>
+            <assign variable="rainbowColors[3]" expression="&quot;green&quot;"/>
+            <assign variable="rainbowColors[4]" expression="&quot;blue&quot;"/>
+            <assign variable="rainbowColors[5]" expression="&quot;indigo&quot;"/>
+            <assign variable="rainbowColors[6]" expression="&quot;violet&quot;"/>
+            <declare name="userGuesses" type="String" array="True" size="7"/>
+            <assign variable="userName" expression="GetUserName()"/>
+            <call expression="GetGuesses(userGuesses)"/>
+            <assign variable="correctCount" expression="CountCorrect(rainbowColors, userGuesses)"/>
+            <call expression="GetGrade(correctCount)"/>
+            <assign variable="grade" expression="GetGrade(correctCount)"/>
+            <output expression="&quot;Hello, &quot; &amp; userName" newline="True"/>
+            <output expression="&quot;You got &quot; &amp; correctCount &amp; &quot; out of 7 correct.&quot;" newline="True"/>
+            <output expression="&quot;Your grade: &quot; &amp; grade" newline="True"/>
+        </body>
+    </function>
+    <function name="CountCorrect" type="Integer" variable="correctCount">
+        <parameters>
+            <parameter name="rainbowColors" type="String" array="True"/>
+            <parameter name="userGuesses" type="String" array="True"/>
+        </parameters>
+        <body>
+            <declare name="correctCount, i" type="Integer" array="False" size=""/>
+            <assign variable="correctCount" expression="0"/>
+            <for variable="i" start="0" end="6" direction="inc" step="1">
+                <if expression="rainbowColors[i] == userGuesses[i]">
+                    <then>
+                        <assign variable="correctCount" expression="correctCount + 1"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+    <function name="GetGrade" type="String" variable="grade">
+        <parameters>
+            <parameter name="correctCount" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="grade" type="String" array="False" size=""/>
+            <if expression="correctCount &lt;= 2">
+                <then>
+                    <assign variable="grade" expression="&quot;poor&quot;"/>
+                </then>
+                <else>
+                    <if expression="correctCount &lt;= 5">
+                        <then>
+                            <assign variable="grade" expression="&quot;average&quot;"/>
+                        </then>
+                        <else>
+                            <assign variable="grade" expression="&quot;excellent&quot;"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="GetGuesses" type="None" variable="color">
+        <parameters>
+            <parameter name="userGuesses" type="String" array="True"/>
+        </parameters>
+        <body>
+            <output expression="&quot;INSTRUCTIONS: Write your answers in SMALL CAPS, NO CAPITAL LETTERS.&quot;" newline="True"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="color, maverick" type="String" array="False" size=""/>
+            <assign variable="i" expression="0"/>
+            <for variable="i" start="0" end="6" direction="inc" step="1">
+                <output expression="&quot;Enter color #&quot; &amp; i+1 &amp; &quot; of the rainbow:&quot;" newline="True"/>
+                <input variable="color"/>
+                <assign variable="userGuesses[i]" expression="color"/>
+            </for>
+        </body>
+    </function>
+    <function name="GetUserName" type="String" variable="userName">
+        <parameters/>
+        <body>
+            <declare name="userName" type="String" array="False" size=""/>
+            <output expression="&quot;Enter username&quot;" newline="True"/>
+            <input variable="userName"/>
+        </body>
+    </function>
+</flowgorithm>
